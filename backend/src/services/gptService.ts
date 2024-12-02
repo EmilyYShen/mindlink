@@ -3,25 +3,21 @@ import { Configuration, OpenAIApi } from 'openai';
 const config = new Configuration({ apiKey: process.env.OPENAI_API_KEY });
 const openai = new OpenAIApi(config);
 
-export const generateResponse = async (prompt: string, memory: string[]): Promise<string> => {
-  try {
-    const memoryContext = memory.join('; ');
-    const fullPrompt = `${memoryContext}\n${prompt}`;
-    const response = await openai.createChatCompletion({
-      model: 'gpt-4',
-      messages: [{ role: 'user', content: fullPrompt }],
-    });
+import { getMemory, addMemory } from '../models/memoryModel';
 
-    // Safely access response data
-    const messageContent = response?.data?.choices?.[0]?.message?.content;
+export const generateResponse = async (userId: string, prompt: string): Promise<string> => {
+  const memory = getMemory(userId);
+  const memoryContext = memory.join('; ');
+  const fullPrompt = `${memoryContext}\n${prompt}`;
+  const response = await openai.createChatCompletion({
+    model: 'gpt-4',
+    messages: [{ role: 'user', content: fullPrompt }],
+  });
 
-    if (!messageContent) {
-      throw new Error('No response received from OpenAI API');
-    }
+  const messageContent = response?.data?.choices?.[0]?.message?.content || 'No response';
+  addMemory(userId, prompt);
+  addMemory(userId, messageContent);
 
-    return messageContent;
-  } catch (error) {
-    console.error('Error generating GPT response:', error);
-    throw new Error('Failed to generate response');
-  }
+  return messageContent;
 };
+

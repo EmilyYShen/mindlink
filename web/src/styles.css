@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #edf4ed; /* Light sage green background */
+    margin: 0;
+    padding: 0;
+    color: #2e4f2e; /* Sage green text color */
+  }
+  
+  header {
+    background: #4a7c59; /* Sage green header */
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 6px solid #4a7c59;
+  }
+  
+  button {
+    background: #4a7c59;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background: #3e6b50;
+  }
+  
+  input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  h2 {
+    color: #3e6b50; /* Slightly darker sage green */
+  }
+  
